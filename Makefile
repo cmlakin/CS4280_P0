@@ -8,13 +8,13 @@ TARGET = P0
 bst: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o bst
 
-main.o: main.cpp node.h traversals.h BST.h
+main.o: main.cpp node.h traversals.h buildtree.h
 	$(CC) $(CFLAGS) -c main.cpp
 
 traversals.o: traversals.cpp traversals.h
 	$(CC) $(CFLAGS) -c traversals.cpp
 
-buildtree.o: buildtree.cpp BST.h
+buildtree.o: buildtree.cpp buildtree.h
 	$(CC) $(CFLAGS) -c buildtree.cpp
 
 clean:

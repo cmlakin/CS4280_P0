@@ -8,12 +8,15 @@
  */
 
 #include <iostream>
-#include "BST.h"
+#include "node.h"
+#include "traversals.h"
+#include "buildtree.h"
+
 using namespace std;
 
-int main() {
+int main(int argc, char * argv[]) {
 
-    BST my_tree;
+
     // dynamically allocate memory for user entered strings
     // change arrary to hold last character of string entered
     //int treeArray[SIZE] = {};
@@ -27,7 +30,7 @@ int main() {
 
       char last = userWord.back();
       cout << "last = " << last << " " << int(last) << endl;
-      my_tree.insert(last);
+      insert(last);
 
       cout << "do you want to enter another word?\n";
       cout << "enter 1 for yes or 0 for no: ";
@@ -41,13 +44,13 @@ int main() {
 
     // print traversals
     cout << "\nPre-order: ";
-    my_tree.preOrder(my_tree.getRoot());
+    preOrder(getRoot());
     cout << "\nPost-order: ";
-    my_tree.postOrder(my_tree.getRoot());
-
-    //determine height
-    cout << "\n\nHeight of tree: ";
-    cout << BST::height(my_tree.getRoot());
+    postOrder(getRoot());
+    //
+    // //determine height
+    // cout << "\n\nHeight of tree: ";
+    // cout << BST::height(my_tree.getRoot());
 
     return 0;
 }
