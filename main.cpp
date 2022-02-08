@@ -47,6 +47,8 @@ int main(int argc, char * argv[]) {
     preOrder(getRoot());
     cout << "\nPost-order: ";
     postOrder(getRoot());
+    cout << "\nLevel-order: ";
+    printLevelOrder(getRoot());
     //
     // //determine height
     // cout << "\n\nHeight of tree: ";
