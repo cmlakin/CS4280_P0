@@ -1,21 +1,22 @@
-struct Node {
-    char value; // change to list of words
-    Node* left;
-    Node* right;
-    Node* parent;
+struct node_t {
+    char value; // last character of word
+    //list<string> words; // list of words each node holds
+    node_t* left;
+    node_t* right;
+    node_t* parent;
 
     // value constructor
-    Node(char value) {
+    node_t(char value) {
         this->value = value;
         left = right = parent = nullptr;
     }
 
     // copy constructor
-    Node(const Node& rhs) { }
+    node_t(const node_t& rhs) { }
 
     // destructor
-    ~Node(void) {
+    ~node_t(void) {
         delete left;  // calls delete of left, which recursively calls delete on its left and right
         delete right;
     }
-}; // end of struct Node
+}; // end of struct node_t

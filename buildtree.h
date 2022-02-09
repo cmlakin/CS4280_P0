@@ -1,3 +1,3 @@
 
 void insert(char);
-Node* getRoot();
+node_t* getRoot();

@@ -14,10 +14,10 @@ using namespace std;
 
 struct BST {
 
-    static Node* successor(Node* p) {
+    static node_t* successor(node_t* p) {
         if (p->right != 0) { // p has a right subtree
-            /* successor to p will be smallest node  right subtree */
-            Node* next = p->right;
+            /* successor to p will be smallest node_t  right subtree */
+            node_t* next = p->right;
             while (next->left != 0) {
                 next = next->left;
             }
@@ -25,7 +25,7 @@ struct BST {
         }
         else { // p does not have a right subtree
             /* successor to p will be closest ancestor where we go up a left branch */
-            Node* parent = p->parent;
+            node_t* parent = p->parent;
             while (parent != 0 && parent->right == p) {
                 p = parent;
                 parent = p->parent;

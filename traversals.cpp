@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void preOrder(Node* p) {
+void preOrder(node_t* p) {
     if (p == nullptr) {
         return;
     } else {
@@ -16,7 +16,7 @@ void preOrder(Node* p) {
     }
 }
 
-void postOrder(Node* p) {
+void postOrder(node_t* p) {
     if (p == nullptr) {
         return;
     } else {
@@ -31,7 +31,7 @@ void postOrder(Node* p) {
 
 /* Function to print level
 order traversal a tree*/
-void printLevelOrder(Node* root)
+void printLevelOrder(node_t* root)
 {
     int h = height(root);
     int i;
@@ -39,8 +39,8 @@ void printLevelOrder(Node* root)
         printCurrentLevel(root, i);
 }
 
-/* Print nodes at a current level */
-void printCurrentLevel(Node* root, int level)
+/* Print node_ts at a current level */
+void printCurrentLevel(node_t* root, int level)
 {
     if (root == NULL)
         return;
@@ -53,16 +53,16 @@ void printCurrentLevel(Node* root, int level)
 }
 
 /* Compute the "height" of a tree -- the number of
-    nodes along the longest path from the root node
-    down to the farthest leaf node.*/
-int height(Node* node)
+    node_ts along the longest path from the root node_t
+    down to the farthest leaf node_t.*/
+int height(node_t* node_t)
 {
-    if (node == NULL)
+    if (node_t == NULL)
         return 0;
     else {
         /* compute the height of each subtree */
-        int lheight = height(node->left);
-        int rheight = height(node->right);
+        int lheight = height(node_t->left);
+        int rheight = height(node_t->right);
 
         /* use the larger one */
         if (lheight > rheight) {
@@ -74,12 +74,12 @@ int height(Node* node)
     }
 }
 
-// Node* newNode(int value)
+// node_t* newnode_t(int value)
 // {
-//     Node* Node = new Node();
-//     Node->value = value;
-//     Node->left = NULL;
-//     Node->right = NULL;
+//     node_t* node_t = new node_t();
+//     node_t->value = value;
+//     node_t->left = NULL;
+//     node_t->right = NULL;
 //
-//     return (Node);
+//     return (node_t);
 // }
