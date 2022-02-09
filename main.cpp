@@ -8,6 +8,7 @@
  */
 
 #include <iostream>
+#include <fstream>
 #include "node.h"
 #include "traversals.h"
 #include "buildtree.h"
@@ -16,43 +17,61 @@ using namespace std;
 
 int main(int argc, char * argv[]) {
 
-
-    // dynamically allocate memory for user entered strings
-    // change arrary to hold last character of string entered
-    //int treeArray[SIZE] = {};
-
-    int choice = 0;
+    char* filename;
+    fstream inFile;
+    int choice = 0; // choice to enter another word or not
     string userWord;
 
-    do {
-      cout << "Enter a word to add to BST: ";
-      cin >> userWord;
+    // parse commandline arguements
+    if (argc >= 3){
+      cout << "Fatal: Improper Usage\n";
+      cout << "Usage: P0 [filename]";
+    }
+    else if (argc == 2) {
+      // prints file name if ./P0 < P0_test1 P0_test2 is entered
+      // output: filename = P0_test2
 
-      char last = userWord.back();
-      cout << "last = " << last << " " << int(last) << endl;
-      insert(last);
+      filename = argv[1];
+      cout << "filename = " << filename << endl;
 
-      cout << "do you want to enter another word?\n";
-      cout << "enter 1 for yes or 0 for no: ";
-      cin >> choice;
+      filename = argv[1];
+      inFile.open(filename);
 
-    } while(choice == 1);
+      while(inFile) {
+        inFile >> userWord;
+        char last = userWord.back();
+        cout << "last = " << last << " " << int(last) << endl;
+        insert(last);
+      }
+      inFile.close();
+    }
+    else if (argc == 1){
+      do {
+        cout << "Enter a word to add to BST: ";
+        cin >> userWord;
 
-    // for (int i = 0; i < SIZE; ++i){
-    //     my_tree.insert(treeArray[i]);
-    // }
+        char last = userWord.back();
+        cout << "last = " << last << " " << int(last) << endl;
+        insert(last);
 
-    // print traversals
-    cout << "\nPre-order: ";
-    preOrder(getRoot());
-    cout << "\nPost-order: ";
-    postOrder(getRoot());
-    cout << "\nLevel-order: ";
-    printLevelOrder(getRoot());
+        cout << "do you want to enter another word?\n";
+        cout << "enter 1 for yes or 0 for no: ";
+        cin >> choice;
+
+      } while(choice == 1);
+    }
+
+
+
+
     //
-    // //determine height
-    // cout << "\n\nHeight of tree: ";
-    // cout << BST::height(my_tree.getRoot());
+    // // print traversals
+    // cout << "\nPre-order: ";
+    // preOrder(getRoot());
+    // cout << "\nPost-order: ";
+    // postOrder(getRoot());
+    // cout << "\nLevel-order: ";
+    // printLevelOrder(getRoot());
 
     return 0;
 }
