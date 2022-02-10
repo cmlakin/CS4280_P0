@@ -44,8 +44,9 @@ void printCurrentLevel(node_t* root, int level)
 {
     if (root == NULL)
         return;
-    if (level == 1)
-        cout << root->value << " ";
+    if (level == 1){
+        cout << root->value << ":";
+    }
     else if (level > 1) {
         printCurrentLevel(root->left, level - 1);
         printCurrentLevel(root->right, level - 1);
