@@ -7,25 +7,25 @@
 #include "buildtree.h"
 
 using namespace std;
-Node* root = nullptr;
+node_t* root = nullptr;
 
-Node* getRoot() {
+node_t* getRoot() {
   return root;
 }
 
 
 void insert(char value) {
 
-    Node* child = new Node(value); // create new Node which will be inserted
+    node_t* child = new node_t(value); // create new node_t which will be inserted
 
     if (root == nullptr) {
         root = child; // new child becomes root
         return;
     }
 
-    Node* parent = nullptr;
-    Node* p = root;			// start from p = root
-    while (p != nullptr) {	// keep searching for empty spot to insert our new Node
+    node_t* parent = nullptr;
+    node_t* p = root;			// start from p = root
+    while (p != nullptr) {	// keep searching for empty spot to insert our new node_t
         parent = p;
         if (value < p->value) {
             p = p->left;
@@ -37,7 +37,7 @@ void insert(char value) {
 
     if (value < parent->value) {
         assert(parent->left == nullptr);	// double-check to see if while loop worked correctly
-        parent->left = child;	// insert our new node
+        parent->left = child;	// insert our new node_t
     }
     else { // same as above
         assert(parent->right == nullptr);

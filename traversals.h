@@ -1,7 +1,7 @@
 
-void preOrder(Node*);
-void postOrder(Node*);
-void printLevelOrder(Node*);
-void printCurrentLevel(Node*, int);
-int height(Node*);
-//Node* newNode(int);
+void preOrder(node_t*);
+void postOrder(node_t*);
+void printLevelOrder(node_t*);
+void printCurrentLevel(node_t*, int);
+int height(node_t*);
+//node_t* newnode_t(int);
