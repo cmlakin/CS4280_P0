@@ -11,46 +11,40 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
-#include <istream>
+#include <fstream>
 #include "node.h"
 #include "traversals.h"
 #include "buildtree.h"
 
 using namespace std;
 
-void buildTree(istream);
+void buildTree(istream&);
 
 int main(int argc, char * argv[]) {
 
+    int choice;
     char* filename;
-    istream inFile;
+    fstream inFile;
     string userWord;
 
     // parse commandline arguements
     if (argc == 2) {
-      // prints file name if ./P0 < P0_test1 P0_test2 is entered
-      // output: filename = P0_test2
-
       filename = argv[1];
-    //   cout << "filename = " << filename << endl;
-    //   //readFile(filename);
-    //
-      inFile.open(filename);
 
+      inFile.open(filename);
       buildTree(inFile);
       inFile.close();
-    // }
-    // else {
-    //
-    //   for (int i = 1; i < argc; i++) {
-    //     cin >> userWord;
-    //     char last = userWord.back();
-    //     insert(last);
-    //   }
-    // }
+    }
+    else {
+      // for (int i = 1; i < argc; i++) {
+      //   cin >> userWord;
+      //   char last = userWord.back();
+      //   insert(last);
+      // }
 
-
-
+      cout << "word: ";
+      buildTree(cin);
+    }
 
     //
     // // print traversals
@@ -64,7 +58,7 @@ int main(int argc, char * argv[]) {
     return 0;
 }
 
-void buildTree(istream in) {
+void buildTree(istream& in) {
   string userWord;
   while(in >> userWord) {
     char last = userWord.back();
