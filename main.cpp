@@ -8,19 +8,22 @@
  */
 
 #include <iostream>
-#include <fstream>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string>
+#include <istream>
 #include "node.h"
 #include "traversals.h"
 #include "buildtree.h"
 
 using namespace std;
 
-void readFile(char *);
+void buildTree(istream);
 
 int main(int argc, char * argv[]) {
 
     char* filename;
-    fstream inFile;
+    istream inFile;
     string userWord;
 
     // parse commandline arguements
@@ -29,20 +32,14 @@ int main(int argc, char * argv[]) {
       // output: filename = P0_test2
 
       filename = argv[1];
-      cout << "filename = " << filename << endl;
-
+    //   cout << "filename = " << filename << endl;
+    //   //readFile(filename);
+    //
       inFile.open(filename);
 
-      //readFile(filename);
-
-      while(inFile) {
-        inFile >> userWord;
-        char last = userWord.back();
-        cout << "last = " << last << " " << int(last) << endl;
-        insert(last);
-      }
+      buildTree(inFile);
       inFile.close();
-    }
+    // }
     // else {
     //
     //   for (int i = 1; i < argc; i++) {
@@ -67,19 +64,12 @@ int main(int argc, char * argv[]) {
     return 0;
 }
 
-// void readFile(char * file) {
-//
-//   fstream inFile;
-//   string userWord;
-//
-//   inFile.open(file);
-//
-//   while(inFile >> userWord) {
-//     inFile >> userWord;
-//     char last = userWord.back();
-//     cout << "last = " << last << " " << int(last) << endl;
-//     insert(last);
-//   }
-//   inFile.close();
-//
-// }
+void buildTree(istream in) {
+  string userWord;
+  while(in >> userWord) {
+    char last = userWord.back();
+    cout << "last = " << last << " " << int(last) << endl;
+    insert(last);
+  }
+
+}
