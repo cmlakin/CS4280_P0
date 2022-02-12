@@ -1,5 +1,8 @@
+#include <fstream>
 
-void preOrder(node_t*);
+using std::fstream;
+
+void preOrder(node_t*, fstream&);
 void postOrder(node_t*);
 void printLevelOrder(node_t*);
 void printCurrentLevel(node_t*, int);

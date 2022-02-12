@@ -1,6 +1,12 @@
+#include <list>
+
+using std::list;
+using std::string;
+
 struct node_t {
     char value; // last character of word
-    //list<string> words; // list of words each node holds
+    list<string> words; // list of words each node holds
+    int level;
     node_t* left;
     node_t* right;
     node_t* parent;

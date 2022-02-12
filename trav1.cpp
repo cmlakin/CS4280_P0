@@ -1,21 +1,25 @@
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
+#include <stdio.h>
 #include "node.h"
 #include "traversals.h"
 
-
 using namespace std;
 
-void preOrder(node_t* p, fstream& out) {
+string output;
+fstream outFile;
+
+void preOrder(node_t* p) {
     if (p == nullptr) {
         return;
     } else {
-        out << p->value << " ";
-        for (string s: p->words)
-          out << s << " ";
-        out << endl;
-        preOrder(p->left, out);
-        preOrder(p->right, out);
+        output = "P0.levelorder";
+        outFile.open(output);
+        outFile << p->value << " ";
+        preOrder(p->left);
+        preOrder(p->right);
+        outFile.close();
     }
 }
 

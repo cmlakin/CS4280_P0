@@ -14,7 +14,7 @@ node_t* getRoot() {
 }
 
 
-void insert(char value) {
+void insert(char value, const string& uWord) {
 
     node_t* child = new node_t(value); // create new node_t which will be inserted
 
@@ -30,8 +30,11 @@ void insert(char value) {
         if (value < p->value) {
             p = p->left;
         }
+        else if (value > p->value){
+          p = p->right;
+        }
         else {
-            p = p->right;
+          p->words.push_back(uWord);
         }
     }	// while loop exits when p->left or p->right = null ptr
 
