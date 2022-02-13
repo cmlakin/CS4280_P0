@@ -6,27 +6,35 @@
 
 using namespace std;
 
-void preOrder(node_t* p, fstream& out) {
-    if (p == nullptr) {
-        return;
-    } else {
-        out << p->value << " ";
-        for (string s: p->words)
-          out << s << " ";
-        out << endl;
-        preOrder(p->left, out);
-        preOrder(p->right, out);
+void preOrder(node_t* p, ofstream& out) {
+  if (p == nullptr) {
+    return;
+  } else {
+    for(int i = 0; i < p->level; i++) {
+      out << "  ";
     }
+    out << p->level << " " << p->value << " ";
+    for (string s: p->words) out << s << " ";
+    out << endl;
+    preOrder(p->left, out);
+    preOrder(p->right, out);
+  }
 }
 
-void postOrder(node_t* p) {
-    if (p == nullptr) {
-        return;
-    } else {
-        postOrder(p->left);
-        postOrder(p->right);
-        cout << p->value << " ";
+void postOrder(node_t* p, ofstream& out) {
+  if (p == nullptr) {
+    return;
+  } else {
+    for(int i = 0; i < p->level; i++) {
+      out << "  ";
     }
+    out << p->level << " " << p->value << " ";
+    for (string s: p->words) out << s << " ";
+    out << endl;
+    postOrder(p->left, out);
+    postOrder(p->right, out);
+  }
+
 }
 
 // level order functions from:
@@ -34,26 +42,34 @@ void postOrder(node_t* p) {
 
 /* Function to print level
 order traversal a tree*/
-void printLevelOrder(node_t* root)
+void printLevelOrder(node_t* root, ofstream& out)
 {
-    int h = height(root);
-    int i;
-    for (i = 1; i <= h; i++)
-        printCurrentLevel(root, i);
+  int h = height(root);
+  int i;
+  for (i = 1; i <= h; i++) {
+    printCurrentLevel(root, i, out);
+  }
+
 }
 
 /* Print node_ts at a current level */
-void printCurrentLevel(node_t* root, int level)
+void printCurrentLevel(node_t* p, int level, ofstream& out)
 {
-    if (root == NULL)
-        return;
-    if (level == 1){
-        cout << root->value << ":";
+  if (p == NULL)
+    return;
+  if (level == 1){
+    for(int j = 0; j < p->level; j++) {
+      out << "  ";
     }
-    else if (level > 1) {
-        printCurrentLevel(root->left, level - 1);
-        printCurrentLevel(root->right, level - 1);
-    }
+    out << p->level << " " << p->value << " ";
+    for (string s: p->words) out << s << " ";
+    out << endl;
+  }
+  else if (level > 1) {
+    printCurrentLevel(p->left, level - 1, out);
+    printCurrentLevel(p->right, level - 1, out);
+  }
+
 }
 
 /* Compute the "height" of a tree -- the number of
@@ -61,21 +77,21 @@ void printCurrentLevel(node_t* root, int level)
     down to the farthest leaf node_t.*/
 int height(node_t* node_t)
 {
-    if (node_t == NULL)
-        return 0;
-    else {
-        /* compute the height of each subtree */
-        int lheight = height(node_t->left);
-        int rheight = height(node_t->right);
+  if (node_t == NULL)
+    return 0;
+  else {
+      /* compute the height of each subtree */
+    int lheight = height(node_t->left);
+    int rheight = height(node_t->right);
 
-        /* use the larger one */
-        if (lheight > rheight) {
-            return (lheight + 1);
-        }
-        else {
-            return (rheight + 1);
-        }
+    /* use the larger one */
+    if (lheight > rheight) {
+      return (lheight + 1);
     }
+    else {
+      return (rheight + 1);
+    }
+  }
 }
 
 // node_t* newnode_t(int value)

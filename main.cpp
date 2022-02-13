@@ -1,10 +1,11 @@
 /***************************************************************
  * Corrina Lakin
- * Project 3 - Part A
- * Create BST with given elements. Print traversals. Search for
- * given keys and print their path. Search for height of tree and
- * smallest and largest keys. Modify tree by deleting specified
- * node_t and print traversals again.
+ * CS4280 P0
+ * Description:
+    Create Binary Search Tree.
+    Print Traversals: levelorder, preorder, postorder
+    No numbers or special characters
+    Proper error messages
  */
 
 #include <iostream>
@@ -22,44 +23,45 @@ void buildTree(istream&);
 
 int main(int argc, char * argv[]) {
 
-    char* filenameIn;
-    //char* filePre = "P0.preOrder";
-    // char* filePost = "P0.postorder";
-    // char* fileLevel = "P0.levelorder";
-    fstream inFile;
-    fstream outFile;
-    string userWord;
+  char* filenameIn;
+  ifstream inFile;
+  ofstream outFile1;
+  ofstream outFile2;
+  ofstream outFile3;
+  string userWord;
 
-    // parse commandline arguements
-    if (argc == 2) {
-      filenameIn = argv[1];
+  // parse commandline arguements
+  if (argc == 2) {
+    filenameIn = argv[1];
 
-      inFile.open(filenameIn);
-      buildTree(inFile);
-      inFile.close();
-    }
-    else {
-      cout << "Enter words. When finished enter [ctrl]d to stop\n";
-      buildTree(cin);
-    }
+    inFile.open(filenameIn);
+    buildTree(inFile);
+    inFile.close();
+  }
+  else {
+    cout << "Enter words. When finished enter [ctrl]d to stop\n";
+    buildTree(cin);
+  }
 
-    outFile.open("P0.preOrder");
-    // // print traversals
-    cout << "\nPre-order: ";
-    preOrder(getRoot(), outFile);
+  //print traversals
+  outFile1.open("P0.preorder");
+  preOrder(getRoot(), outFile1);
+  outFile1.close();
 
-    cout << "\nPost-order: ";
-    // postOrder(getRoot());
-    // cout << "\nLevel-order: ";
-    // printLevelOrder(getRoot());
-    outFile.close();
-    return 0;
+  outFile2.open("P0.postorder");
+  postOrder(getRoot(), outFile2);
+  outFile2.close();
+
+  outFile3.open("P0.levelorder");
+  printLevelOrder(getRoot(), outFile3);
+  outFile3.close();
+
+  return 0;
 }
 
 void buildTree(istream& in) {
   string userWord;
   while(in >> userWord) {
-
     // for (int i = 0; i < userWord.size(); i++){
     //   if (!isalpha(userWord[i])) {
     //     // print error message
@@ -69,7 +71,6 @@ void buildTree(istream& in) {
     //   }
     // }
     char last = userWord.back();
-    cout << "last = " << last << " " << int(last) << endl;
     insert(last, userWord);
   }
 }
