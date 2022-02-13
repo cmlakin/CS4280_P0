@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <string>
 #include "node.h"
 #include "traversals.h"
 
@@ -63,7 +64,7 @@ void printCurrentLevel(node_t* p, int level, ofstream& out)
       out << "  ";
     }
     out << p->level << " " << p->value << " ";
-    for (string s: p->words) out << s << " ";
+    for (const string& s: p->words) out << s << " ";
     out << endl;
   }
   else if (level > 1) {

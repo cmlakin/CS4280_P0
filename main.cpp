@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <string>
 #include <fstream>
+#include <type_traits>
 #include "node.h"
 #include "traversals.h"
 #include "buildtree.h"
@@ -25,9 +26,7 @@ int main(int argc, char * argv[]) {
 
   char* filenameIn;
   ifstream inFile;
-  ofstream outFile1;
-  ofstream outFile2;
-  ofstream outFile3;
+  ofstream outFile;
   string userWord;
 
   // parse commandline arguements
@@ -43,34 +42,50 @@ int main(int argc, char * argv[]) {
     buildTree(cin);
   }
 
-  //print traversals
-  outFile1.open("P0.preorder");
-  preOrder(getRoot(), outFile1);
-  outFile1.close();
+  //print traversals to designated file
+  outFile.open("P0.preorder");
+  preOrder(getRoot(), outFile);
+  outFile.close();
 
-  outFile2.open("P0.postorder");
-  postOrder(getRoot(), outFile2);
-  outFile2.close();
+  outFile.open("P0.postorder");
+  postOrder(getRoot(), outFile);
+  outFile.close();
 
-  outFile3.open("P0.levelorder");
-  printLevelOrder(getRoot(), outFile3);
-  outFile3.close();
+  outFile.open("P0.levelorder");
+  printLevelOrder(getRoot(), outFile);
+  outFile.close();
 
   return 0;
 }
 
+// https://mathbits.com/MathBits/CompSci/Files/End.htm
+// used as example for checking for empty file
+
 void buildTree(istream& in) {
   string userWord;
-  while(in >> userWord) {
-    // for (int i = 0; i < userWord.size(); i++){
-    //   if (!isalpha(userWord[i])) {
-    //     // print error message
-    //     cout << "Error. Only lowercase letters accepted.\n";
-    //     cout << "Exiting program.\n";
-    //     return;
-    //   }
-    // }
+  in >> userWord;
+  if (in.eof()) {
+    cout << "Error: Empty file, no words to input.\n";
+    cout << "Exiting program.\n";
+  }
+  while(!in.eof()) {
+    cout << "userWord = " << userWord << endl;
+    for (int i = 0; i < userWord.size(); i++){
+      if (!isalpha(userWord[i])) {
+        // print error message
+        cout << "Error: Number(s) and/or special character(s) detected: ";
+        cout << userWord << endl;
+        cout << "Only lowercase letters accepted. Exiting program.\n";
+        return;
+      }
+      else if (isupper(userWord[i])) {
+        cout << "Error: Capital letter(s) detected.\n" << userWord << endl;
+        cout << "Only lowercase letters accepted. Exiting program.\n";
+        return;
+      }
+    }
     char last = userWord.back();
     insert(last, userWord);
+    in >> userWord;
   }
 }

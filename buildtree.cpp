@@ -31,14 +31,17 @@ void insert(char value, const string& uWord) {
     parent = p;
     if (value < p->value) {
       p = p->left;
+      //p->words.push_back(uWord);
       countLevels++;
     }
     else if (value > p->value){
       p = p->right;
+      //p->words.push_back(uWord);
       countLevels++;
     }
     else if (value == p->value){
       p->words.push_back(uWord);
+      //for (const string& s: p->words) cout << s << " ";
       break;
     }
   }	// while loop exits when p->left or p->right = null ptr
@@ -46,11 +49,13 @@ void insert(char value, const string& uWord) {
   if (value < parent->value) {
     assert(parent->left == nullptr);	// double-check to see if while loop worked correctly
     parent->left = child;	// insert our new node_t
+    child->words.push_back(uWord);
     child->level = countLevels;
   }
   else if (value > parent->value) { // same as above
     assert(parent->right == nullptr);
     parent->right = child;
+    child->words.push_back(uWord);
     child->level = countLevels;
   }
   else {

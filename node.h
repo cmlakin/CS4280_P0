@@ -1,3 +1,6 @@
+#ifndef _NODE_h
+#define _NODE_h
+
 #include <list>
 
 using std::list;
@@ -26,3 +29,5 @@ struct node_t {
     delete right;
   }
 }; // end of struct node_t
+
+#endif _NODE_h
