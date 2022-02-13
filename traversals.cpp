@@ -25,14 +25,15 @@ void postOrder(node_t* p, ofstream& out) {
   if (p == nullptr) {
     return;
   } else {
+    postOrder(p->left, out);
+    postOrder(p->right, out);
     for(int i = 0; i < p->level; i++) {
       out << "  ";
     }
     out << p->level << " " << p->value << " ";
     for (string s: p->words) out << s << " ";
     out << endl;
-    postOrder(p->left, out);
-    postOrder(p->right, out);
+
   }
 
 }
